@@ -1,6 +1,8 @@
 # coding=utf-8
 import sys, socket, select
 import time
+import lxml.etree
+from cStringIO import StringIO
 
 class Student:
     def connect(self):
@@ -27,7 +29,14 @@ class Student:
         while not data:
             data = self.s.recv(4096)
 
-        return data
+        xml_schema_document = lxml.etree.parse(StringIO(data))
+        #xmlschema = lxml.etree.XMLSchema(xml_schema_document)
+        #xml_document = lxml.etree.parse(data)
+        xml_schema_document.xpath('xsd:element',
+    namespaces={"xsd": "http://www.w3.org/2001/XMLSchema"})
+
+        import pdb; pdb.set_trace()
+        return result
 
 
 student = Student()
