@@ -2,10 +2,13 @@
 <request xmlns="https://www.w3schools.com"
 xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 xsi:schemaLocation="https://www.w3schools.com status_submeter.xsd" >
-  <nome_metodo>consultarStatus</nome_metodo>
+  <nome_metodo>status_submeter</nome_metodo>
   <parametro>
-    <cpf>
-      00000000004
-    </cpf>
+    <status_submeter>
+      0
+    </status_submeter>
   </parametro>
+  <tipo_retorno>
+  	int
+  </tipo_retorno>
 </request>

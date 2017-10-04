@@ -3,20 +3,14 @@
 targetNamespace="https://www.w3schools.com"
 xmlns="https://www.w3schools.com"
 elementFormDefault="qualified">
-<xs:element name="request_xml">
+<xs:element name="request">
 <xs:complexType>
 <xs:sequence>
   <xs:element name="nome_metodo" type="xs:string" />
   <xs:element name="parametro">
     <xs:complexType>
       <xs:sequence>
-        <xs:element name="cpf">
-          <xs:simpleType>
-            <xs:restriction base = "xs:string">
-              <xs:length value = "11"/>
-            </xs:restriction>
-          </xs:simpleType>
-        </xs:element>
+        <xs:element name="status_submeter" type="xs:integer" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
