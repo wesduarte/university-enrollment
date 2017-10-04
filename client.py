@@ -6,8 +6,10 @@ from cStringIO import StringIO
 
 class Student:
     def _connect(self):
+        host = sys.argv[1]
+        port = int(sys.argv[2])
         self.s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-        self.s.connect(("localhost", 9008))
+        self.s.connect((host, port))
 
 
     def _get_xml(self, xml_filename):
