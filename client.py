@@ -12,14 +12,14 @@ class Student:
         self.s.connect((host, port))
 
 
-    def _get_xml(self, xml_filename):
+    def _getXml(self, xml_filename):
         parsed_xml = ''
         filepath = 'static/%s' % xml_filename
         with open(filepath) as xml:
             parsed_xml = xml.read().replace("\n", "")
         return parsed_xml
 
-    def __prepare_message(self, xml):
+    def __prepareMessage(self, xml):
         message =  '<?xml version="1.0" >\n \
                 <Request>\n \
                   <nome_metodo>submeter</nome_metodo>\n \
@@ -29,7 +29,7 @@ class Student:
         return message
 
     def submit(self, xml):
-        submit_message =  self.__prepare_message(xml)
+        submit_message =  self.__prepareMessage(xml)
         self.s.send(submit_message)
         xml = self.s.recv(4096)
 
@@ -73,8 +73,23 @@ class Student:
 
         return status
 
+    def convertInvalidXml(self, xml_filename, xslt_filename):
+        newXml = None
+        xml_filepath = 'static/%s' % xml_filename
+        xslt_filepath = 'static/%s' % xslt_filename
+
+        with open(xml_filepath) as xml_file:
+            xml = etree.parse(xml_filename)
+
+        with open(xslt_filepath) as xslt_file:
+            xslt = etree.parse(xslt_filename)
+            transform = etree.XSLT(xslt)
+            newXml = transform(xml)
+
+        return newXml
+
 
 student = Student()
 student._connect()
-xml = student._get_xml('boletim.xml')
+xml = student._getXml('boletim.xml')
 print student.submit(xml)
