@@ -1,0 +1,11 @@
+<?xml version="1.0"?>
+<request xmlns="https://www.w3schools.com"
+xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+xsi:schemaLocation="https://www.w3schools.com status_submeter.xsd" >
+  <nome_metodo>consultarStatus</nome_metodo>
+  <parametro>
+    <cpf>
+      00000000004
+    </cpf>
+  </parametro>
+</request>

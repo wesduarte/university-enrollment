@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" targetNamespace="https://www.w3schools.com" xmlns="https://www.w3schools.com" elementFormDefault="qualified">
+  <xs:element name="boletim">
+    <xs:complexType>
+      <xs:sequence>
+        <!-- Inicio informacao Pessoal-->
+        <xs:element name="informacao_pessoal">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="nome" type="xs:string"/>
+              <xs:element name="CPF" type="xs:string"/>
+              <xs:element name="matricula" type="xs:integer"/>
+              <xs:element name="endereco" type="xs:string"/>
+              <xs:element name="telefone" type="xs:string"/>
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+        <!-- Fim informacao pessoal -->
+        <!-- Inicio informacao periodo -->
+        <xs:element name="informacao_periodo">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="data" type="xs:date"/>
+              <xs:element name="cr_periodo" type="xs:integer"/>
+              <!-- Inicio materia -->
+              <xs:element name="materia" minOccurs="1" maxOccurs="unbounded">
+                <xs:complexType>
+                  <xs:sequence>
+                    <xs:element name="nome" type="xs:string"/>
+                    <xs:element name="nota_final" type="xs:float"/>
+                    <xs:element name="carga_horaria" type="xs:float"/>
+                    <xs:element name="creditos" type="xs:float"/>
+                    <!-- Aprovado, Reprovado por Media, Reprovado por Falta, Reprovado por Falta e Media, Dispensado... -->
+                 	<xs:element name="situacao_final" type="xs:string"/>
+                  </xs:sequence>
+                </xs:complexType>
+              </xs:element>
+              <!-- Fim matéria -->
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+        <!-- Fim informaçao periodo -->
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+</xs:schema>

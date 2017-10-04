@@ -1,0 +1,54 @@
+<?xml version="1.0"?>
+
+<request xmlns="https://www.w3schools.com"
+xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+xsi:schemaLocation="https://www.w3schools.com boletim.xsd">
+    <nome_metodo>submeter</nome_metodo>
+  	<informacao_pessoal>
+				<nome>vanessa soares</nome>
+        <CPF>11567788990</CPF>
+				<matricula>2013780301</matricula>
+      	<endereco>estrada instendente magalhaes</endereco>
+      	<telefone>999999999</telefone>
+    </informacao_pessoal>
+
+  	<informacao_periodo>
+      	<data>2017-09-25</data>
+      	<cr_periodo>9</cr_periodo>
+        <materia>
+          	<nome>Mineracao de dados</nome>
+          	<nota_final>10.0</nota_final>
+            <carga_horaria>89.0</carga_horaria>
+            <creditos>123.2</creditos>
+            <situacao_final>Aprovado</situacao_final>
+      	</materia>
+      	<materia>
+            <nome>Mineracao de dados2</nome>
+            <nota_final>10.0</nota_final>
+            <carga_horaria>89.0</carga_horaria>
+            <creditos>123.2</creditos>
+            <situacao_final>Aprovado</situacao_final>
+        </materia>
+      	<materia>
+            <nome>Mineracao de dados3</nome>
+            <nota_final>10.0</nota_final>
+            <carga_horaria>89.0</carga_horaria>
+            <creditos>123.2</creditos>
+            <situacao_final>Aprovado</situacao_final>
+        </materia>
+      	<materia>
+            <nome>Mineracao de dados4</nome>
+            <nota_final>10.0</nota_final>
+            <carga_horaria>89.0</carga_horaria>
+            <creditos>123.2</creditos>
+            <situacao_final>Aprovado</situacao_final>
+        </materia>
+      	<materia>
+            <nome>Mineracao de dados5</nome>
+            <nota_final>10.0</nota_final>
+            <carga_horaria>89.0</carga_horaria>
+            <creditos>123.2</creditos>
+            <situacao_final>Aprovado</situacao_final>
+        </materia>
+  	</informacao_periodo>
+</request>
