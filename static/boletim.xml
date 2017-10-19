@@ -1,54 +1,43 @@
-<?xml version="1.0"?>
-
-<request xmlns="https://www.w3schools.com"
-xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-xsi:schemaLocation="https://www.w3schools.com boletim.xsd">
-    <nome_metodo>submeter</nome_metodo>
-  	<informacao_pessoal>
-				<nome>vanessa soares</nome>
-        <CPF>11567788990</CPF>
-				<matricula>2013780301</matricula>
-      	<endereco>estrada instendente magalhaes</endereco>
-      	<telefone>999999999</telefone>
-    </informacao_pessoal>
-
-  	<informacao_periodo>
-      	<data>2017-09-25</data>
-      	<cr_periodo>9</cr_periodo>
-        <materia>
-          	<nome>Mineracao de dados</nome>
-          	<nota_final>10.0</nota_final>
-            <carga_horaria>89.0</carga_horaria>
-            <creditos>123.2</creditos>
-            <situacao_final>Aprovado</situacao_final>
-      	</materia>
-      	<materia>
-            <nome>Mineracao de dados2</nome>
-            <nota_final>10.0</nota_final>
-            <carga_horaria>89.0</carga_horaria>
-            <creditos>123.2</creditos>
-            <situacao_final>Aprovado</situacao_final>
-        </materia>
-      	<materia>
-            <nome>Mineracao de dados3</nome>
-            <nota_final>10.0</nota_final>
-            <carga_horaria>89.0</carga_horaria>
-            <creditos>123.2</creditos>
-            <situacao_final>Aprovado</situacao_final>
-        </materia>
-      	<materia>
-            <nome>Mineracao de dados4</nome>
-            <nota_final>10.0</nota_final>
-            <carga_horaria>89.0</carga_horaria>
-            <creditos>123.2</creditos>
-            <situacao_final>Aprovado</situacao_final>
-        </materia>
-      	<materia>
-            <nome>Mineracao de dados5</nome>
-            <nota_final>10.0</nota_final>
-            <carga_horaria>89.0</carga_horaria>
-            <creditos>123.2</creditos>
-            <situacao_final>Aprovado</situacao_final>
-        </materia>
-  	</informacao_periodo>
-</request>
+<?xml version="1.0" encoding="UTF-8"?>
+<request xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="https://www.w3schools.com boletim_xsd.xsd">
+<nome_metodo>submeter</nome_metodo>
+<parametro>
+<boletim>
+<universidade unidade="tijuca">
+<documento tipo = "boletim" emissao= "2017-09-29" oficial="sim" autenticado_por="Pro-Reitoria de Graduacao">
+<dados_pessoais>
+<nome>Aluno Candidato</nome>
+<cpf>00000000001</cpf>
+<registro_universitario>2013780220</registro_universitario>
+<notas_enem portugues="20" matematica="50" biologia="30" quimica="30" fisica="25" historia="10" geografia="10" />
+<endereco tipo="residencial">
+<tipo_logradouro>rua</tipo_logradouro>
+<logradouro>Embaixador Francisco Alenpóvoa</logradouro>
+<numero>30</numero>
+</endereco>
+<contatos>
+<contato tipo="email" valor="candidato@gmail.com" />
+<contato tipo="telefone residencial" valor="(21) 3333-3333" />
+<contato tipo="telefone celular" valor="(21) 99999-9999" />
+</contatos>
+</dados_pessoais>
+<periodos>
+<periodo ano="2015" semestre="1" cr="6">
+<aprovado codigo="MAB123" nome="Calculo Infinitesimal I" creditos="4.0" carga_horaria="60" nota="8.0" />
+<aprovado codigo="MAB124" nome="Computacao I" creditos="6.0" carga_horaria="80" nota="7.0" />
+<reprovado codigo="MAB125" nome="Algebra Computacional" creditos="4.0" carga_horaria="60" nota="3.0" />
+</periodo>
+<periodo ano="2015" semestre="2" cr="7">
+<aprovado codigo="MAB223" nome="Calculo Infinitesimal II" creditos="4.0" carga_horaria="60" nota="9.0" />
+<aprovado codigo="MAB224" nome="Computacao II" creditos="6.0" carga_horaria="80" nota="7.0" />
+<aprovado codigo="MAB125" nome="Algebra Computacional" creditos="4.0" carga_horaria="60" nota="5.0" />
+<abandono codigo="MAB226" nome="Arquitetura de Computadores" creditos="4.0" carga_horaria="60" nota="3.0" />
+</periodo>
+<periodo ano="2016" semestre="1" situacao="trancado" />
+<periodo ano="2016" semestre="2" cr="6">
+<aprovado codigo="MAB323" nome="Fisica I" creditos="4.0" carga_horaria="60" nota="6.0" />
+<aprovado codigo="MAB324" nome="Compiladores" creditos="6.0" carga_horaria="80" nota="7.0" />
+<aprovado codigo="MAB325" nome="Banco de Dados" creditos="4.0" carga_horaria="60" nota="5.0" />
+<reprovado codigo="MAB326" nome="Arquitetura de Computadores" creditos="4.0" carga_horaria="60" nota="4.5" />
+</periodo></periodos></documento></universidade></boletim></parametro></request>
+   

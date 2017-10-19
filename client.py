@@ -16,8 +16,29 @@ class Student:
         parsed_xml = ''
         filepath = 'static/%s' % xml_filename
         with open(filepath) as xml:
-            parsed_xml = xml.read().replace("\n", "")
+            parsed_xml = xml.read()
         return parsed_xml
+
+    def _convert(self):
+
+        result_xml = None
+        xml_filename = 'boletim.xml'
+        xml_filepath = 'static/%s' % xml_filename
+        with open(xml_filepath):
+            dom = etree.parse(xml_filepath)
+
+        xsl_filename = 'transform_boletim.xsl'
+        xsl_filepath = 'static/%s' % xsl_filename
+        with open(xsl_filepath):
+            xslt = etree.parse(xsl_filepath)
+
+        try:
+            transform = etree.XSLT(xslt)
+            newdom = transform(dom)
+            result_xml = etree.tostring(newdom, pretty_print=True)
+        except:
+            print "deu ruim"
+        return result_xml
 
     def __prepareMessage(self, xml):
         message =  '<?xml version="1.0" >\n \
@@ -55,6 +76,7 @@ class Student:
         except IOError:
             status = 3
         except etree.XMLSyntaxError:
+            print "Deu ruim"
             status = 1
 
         if status:
@@ -91,5 +113,7 @@ class Student:
 
 student = Student()
 student._connect()
-xml = student._getXml('boletim.xml')
-print student.submit(xml)
+
+student._convert()
+#xml = student._getXml('boletim.xml')
+#print student.submit(xml)

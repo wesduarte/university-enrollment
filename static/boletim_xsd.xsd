@@ -1,0 +1,38 @@
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" targetNamespace="https://www.w3schools.com" xmlns="https://www.w3schools.com" elementFormDefault="qualified">
+  <xs:element name="boletim">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element name="informacao_pessoal">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="nome" type="xs:string"/>
+              <xs:element name="CPF" type="xs:string"/>
+              <xs:element name="matricula" type="xs:integer"/>
+              <xs:element name="endereco" type="xs:string"/>
+              <xs:element name="telefone" type="xs:string"/>
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+        <xs:element name="informacao_periodo" minOccurs="1" maxOccurs="unbounded">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="data" type="xs:string"/>
+              <xs:element name="cr_periodo" type="xs:integer"/>
+              <xs:element name="materia" minOccurs="1" maxOccurs="unbounded">
+                <xs:complexType>
+                  <xs:sequence>
+                    <xs:element name="nome" type="xs:string"/>
+                    <xs:element name="nota_final" type="xs:float"/>
+                    <xs:element name="carga_horaria" type="xs:float"/>
+                    <xs:element name="creditos" type="xs:float"/>
+                 	<xs:element name="situacao_final" type="xs:string"/>
+                  </xs:sequence>
+                </xs:complexType>
+              </xs:element>
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+</xs:schema>
