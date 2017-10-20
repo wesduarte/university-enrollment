@@ -16,7 +16,7 @@ class Student:
     def _connect(self):
         host = sys.argv[1]
         port = int(sys.argv[2])
-        print "Concetando-se ao servidor %s:%s" % (host, port)
+        print "Conectando-se ao servidor %s:%s" % (host, port)
         self.s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
         self.s.connect((host, port))
 
@@ -61,7 +61,8 @@ class Student:
 
         if self.__checkXmlStatus(xml, 'boletim.xsd'):
             xml = self._convertInvalidXml('boletim.xml')
-        submit_message =  self.__prepareMessage('submeter', xml)
+        #submit_message =  self.__prepareMessage('submeter', xml)
+        submit_message = '<?xml version="1.0" encoding="utf-8" ?><request xmlns="https://www.w3schools.com"><nome_metodo>submeter</nome_metodo><parametro><![CDATA[<?xml version="1.0" encoding="utf-8" ?><boletim xmlns="https://www.w3schools.com"><informacao_pessoal><nome>flavio</nome><CPF>1234567890</CPF><matricula>1234567890</matricula><endereco>Rua Fulano da Silva</endereco><telefone>21123456789</telefone></informacao_pessoal><informacao_periodo><data>2017-02-16</data><cr_periodo>7</cr_periodo><materia><nome>comp I</nome><nota_final>9</nota_final><carga_horaria>40</carga_horaria><creditos>10</creditos><situacao_final>AP</situacao_final></materia><materia><nome>comp I</nome><nota_final>9</nota_final><carga_horaria>40</carga_horaria><creditos>10</creditos><situacao_final>AP</situacao_final></materia></informacao_periodo></boletim>]]></parametro><tipo_retorno>int</tipo_retorno></request>\n \0'
         self.s.send(submit_message)
         xml = self.s.recv(4096)
 
@@ -73,13 +74,17 @@ class Student:
         return self.__checkXmlStatus(xml, xsd_filename)
 
     def retrieve_consulta_status_value(self, xml):
-        doc = etree.parse(StringIO(xml))
-        request_elem = doc.getiterator().__next__()
-        parameter_elem = request_elem.iterchildren().__next__().getnext()
-        consultar_status_elem = parameter_elem.iterchildren().__next__()
-        status_text = consultar_status_elem.text
-
         status_value = 0
+        status_text = ''
+        try:
+            doc = etree.parse(StringIO(xml))
+            request_elem = doc.getiterator().__next__()
+            parameter_elem = request_elem.iterchildren().__next__().getnext()
+            consultar_status_elem = parameter_elem.iterchildren().__next__()
+            status_text = consultar_status_elem.text
+        except:
+            pass
+
         for i in status_text:
             if i.isdigit():
                 status_value = int(i)
@@ -91,7 +96,8 @@ class Student:
 
         xml = '<?xml version="1.0" encoding="utf-8" ?>\n \
             <cpf xmlns="https://www.w3schools.com">00000000000</cpf>'
-        submit_message =  self.__prepareMessage('consulta', xml)
+        #submit_message =  self.__prepareMessage('consulta', xml)
+        submit_message = '<?xml version="1.0" encoding="utf-8" ?><request xmlns="https://www.w3schools.com"><nome_metodo>consulta</nome_metodo><parametro><![CDATA[<?xml version="1.0" encoding="utf-8" ?><cpf xmlns="https://www.w3schools.com">00000000000</cpf>]]></parametro><tipo_retorno>int</tipo_retorno></request> \n \0'
         self.s.send(submit_message)
         xml = self.s.recv(4096)
 
@@ -117,7 +123,6 @@ class Student:
         except IOError:
             status = 3
         except etree.XMLSyntaxError:
-            print "Deu ruim"
             status = 1
 
         if status:
