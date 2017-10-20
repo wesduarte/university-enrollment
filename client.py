@@ -67,6 +67,36 @@ class Student:
 
         return self.__checkXmlStatus(xml, xsd_filename)
 
+    def retrieve_consulta_status_value(self, xml):
+        doc = etree.parse(StringIO(xml))
+        request_elem = doc.getiterator().__next__()
+        parameter_elem = request_elem.iterchildren().__next__().getnext()
+        consultar_status_elem = parameter_elem.iterchildren().__next__()
+        status_text = consultar_status_elem.text
+
+        status_value = 0
+        for i in status_text:
+            if i.isdigit():
+                status_value = int(i)
+                break
+        return status_value
+
+
+    def consult_status(self, cpf):
+
+        xml = '<?xml version="1.0" encoding="utf-8" ?>\n \
+            <cpf xmlns="https://www.w3schools.com">00000000000</cpf>'
+        submit_message =  self.__prepareMessage('consulta', xml)
+        self.s.send(submit_message)
+        xml = self.s.recv(4096)
+
+        while not xml:
+            xml = self.s.recv(4096)
+
+        xsd_filename = 'consultar_status.xsd'
+
+        return self.retrieve_consulta_status_value(xml)
+
     def __checkXmlStatus(self, xml, xsd_filename):
         xsd = ''
         status = None
@@ -105,4 +135,4 @@ student = Student()
 student._connect()
 
 xml = student._getXml('boletim.xml')
-print student.submit(xml)
+print student.consult_status('00000000000')

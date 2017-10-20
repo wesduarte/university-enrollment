@@ -1,0 +1,14 @@
+<?xml version="1.0"?>
+<request xmlns="https://www.w3schools.com"
+xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+xsi:schemaLocation="https://www.w3schools.com consultar_status.xsd" >
+  <nome_metodo>consultar_status</nome_metodo>
+  <parametro>
+    <consultar_status>
+      1
+    </consultar_status>
+  </parametro>
+  <tipo_retorno>
+  	int
+  </tipo_retorno>
+</request>
