@@ -5,6 +5,9 @@ from lxml import etree
 from cStringIO import StringIO
 
 class Student:
+
+    STATIC_PATH = 'static/%s'
+
     def _connect(self):
         host = sys.argv[1]
         port = int(sys.argv[2])
@@ -19,16 +22,15 @@ class Student:
             parsed_xml = xml.read()
         return parsed_xml
 
-    def _convert(self):
+    def _convertInvalidXml(self, xml_filename):
 
-        result_xml = None
-        xml_filename = 'boletim.xml'
-        xml_filepath = 'static/%s' % xml_filename
+        valid_xml = None
+        xml_filepath = self.STATIC_PATH % xml_filename
         with open(xml_filepath):
             dom = etree.parse(xml_filepath)
 
         xsl_filename = 'transform_boletim.xsl'
-        xsl_filepath = 'static/%s' % xsl_filename
+        xsl_filepath = self.STATIC_PATH % xsl_filename
         with open(xsl_filepath):
             xslt = etree.parse(xsl_filepath)
 
@@ -38,7 +40,7 @@ class Student:
             result_xml = etree.tostring(newdom, pretty_print=True)
         except:
             print "deu ruim"
-        return result_xml
+        return valid_xml
 
     def __prepareMessage(self, xml):
         message =  '<?xml version="1.0" >\n \
@@ -50,6 +52,9 @@ class Student:
         return message
 
     def submit(self, xml):
+
+        if self.__checkXmlStatus(xml, 'boletim.xsd'):
+            xml = self._convertInvalidXml('boletim.xml')
         submit_message =  self.__prepareMessage(xml)
         self.s.send(submit_message)
         xml = self.s.recv(4096)
@@ -64,7 +69,7 @@ class Student:
     def __checkXmlStatus(self, xml, xsd_filename):
         xsd = ''
         status = None
-        filepath = 'static/%s' % xsd_filename
+        filepath = self.STATIC_PATH % xsd_filename
         with open(filepath) as xsd_file:
             xsd = xsd_file.read()
         xmlschema_doc = etree.parse(StringIO(xsd))
@@ -95,25 +100,8 @@ class Student:
 
         return status
 
-    def convertInvalidXml(self, xml_filename, xslt_filename):
-        newXml = None
-        xml_filepath = 'static/%s' % xml_filename
-        xslt_filepath = 'static/%s' % xslt_filename
-
-        with open(xml_filepath) as xml_file:
-            xml = etree.parse(xml_filename)
-
-        with open(xslt_filepath) as xslt_file:
-            xslt = etree.parse(xslt_filename)
-            transform = etree.XSLT(xslt)
-            newXml = transform(xml)
-
-        return newXml
-
-
 student = Student()
 student._connect()
 
-student._convert()
-#xml = student._getXml('boletim.xml')
-#print student.submit(xml)
+xml = student._getXml('boletim.xml')
+print student.submit(xml)
