@@ -42,20 +42,21 @@ class Student:
             print "deu ruim"
         return valid_xml
 
-    def __prepareMessage(self, xml):
-        message =  '<?xml version="1.0" >\n \
-                <Request>\n \
-                  <nome_metodo>submeter</nome_metodo>\n \
-                  <parametro> <![CDATA[ %s ]]> </parametro>\n \
-                  <tipo_retorno> int </tipo_retorno>\n \
-                </Request>\n' % xml
+    def __prepareMessage(self, method_name, parameter_name):
+        message = '<?xml version="1.0" encoding="utf-8" ?>\n \
+            <request xmlns="https://www.w3schools.com">\n \
+                <nome_metodo>%s</nome_metodo>\n \
+                <parametro><![CDATA[ %s ]></parametro>\n \
+                <tipo_retorno> int </tipo_retorno>\n \
+            </request>\n' % (method_name, parameter_name)
+
         return message
 
     def submit(self, xml):
 
         if self.__checkXmlStatus(xml, 'boletim.xsd'):
             xml = self._convertInvalidXml('boletim.xml')
-        submit_message =  self.__prepareMessage(xml)
+        submit_message =  self.__prepareMessage('submeter', xml)
         self.s.send(submit_message)
         xml = self.s.recv(4096)
 
