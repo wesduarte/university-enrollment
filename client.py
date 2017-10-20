@@ -7,13 +7,18 @@ from cStringIO import StringIO
 class Student:
 
     STATIC_PATH = 'static/%s'
+    SUBMIT_STATUS_MESSAGES = ['sucesso', 'XML inválido', 'XML mal-formado', 'Erro Interno']
+    CONSULT_STATUS_MESSAGES = ['Candidato não encontrado', 'Em processamento',
+        'Candidato Aprovado e Selecionado',
+        'Candidato Aprovado e em Espera',
+        'Candidato Não Aprovado']
 
     def _connect(self):
         host = sys.argv[1]
         port = int(sys.argv[2])
+        print "Concetando-se ao servidor %s:%s" % (host, port)
         self.s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
         self.s.connect((host, port))
-
 
     def _getXml(self, xml_filename):
         parsed_xml = ''
@@ -135,4 +140,11 @@ student = Student()
 student._connect()
 
 xml = student._getXml('boletim.xml')
-print student.consult_status('00000000000')
+print "Submetendo arquivo para o servidor"
+print student.SUBMIT_STATUS_MESSAGES[student.submit(xml)]
+
+cpf = '00000000000'
+print "Consultando status do estudante de cpf = %s " % cpf
+print student.CONSULT_STATUS_MESSAGES[student.consult_status(cpf)]
+
+student.s.close()
