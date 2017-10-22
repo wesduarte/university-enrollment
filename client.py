@@ -5,7 +5,8 @@ from xmlservice import XmlService
 
 class Student:
 
-    SUBMIT_STATUS_MESSAGES = ['sucesso', 'XML inválido', 'XML mal-formado', 'Erro Interno']
+    SUBMIT_STATUS_MESSAGES = ['sucesso', 'XML inválido',
+        'XML mal-formado', 'Erro Interno']
     CONSULT_STATUS_MESSAGES = ['Candidato não encontrado', 'Em processamento',
         'Candidato Aprovado e Selecionado',
         'Candidato Aprovado e em Espera',
@@ -31,7 +32,8 @@ class Student:
     def submit(self, xml):
 
         if XmlService.checkXmlStatus(xml, 'boletim.xsd'):
-            xml = XmlService.convertInvalidXml('boletim.xml')
+            xml = XmlService.convertInvalidXml('boletim.xml',
+                'transform_boletim.xsl')
 
         submit_message =  self.__prepareMessage('submeter', xml)
         self.s.send(submit_message)
@@ -63,7 +65,7 @@ class Student:
 student = Student()
 student._connect()
 
-xml = XmlService.getXml('boletim.xml')
+xml = XmlService.getXmlAsString('boletim.xml')
 print "Submetendo arquivo para o servidor"
 print student.SUBMIT_STATUS_MESSAGES[student.submit(xml)]
 

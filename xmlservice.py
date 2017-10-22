@@ -7,22 +7,21 @@ class XmlService:
     STATIC_PATH = 'static/%s'
 
     @staticmethod
-    def getXml(xml_filename):
-        parsed_xml = ''
+    def getXmlAsString(xml_filename):
+        xml_str = ''
         filepath = XmlService.STATIC_PATH % xml_filename
         with open(filepath) as xml:
-            parsed_xml = xml.read()
-        return parsed_xml
+            xml_str = xml.read()
+        return xml_str
 
     @staticmethod
-    def convertInvalidXml(xml_filename):
+    def convertInvalidXml(xml_filename, xsl_filename):
 
         valid_xml = None
         xml_filepath = XmlService.STATIC_PATH % xml_filename
         with open(xml_filepath):
-            dom = etree.parse(xml_filepath)
+             dom = etree.parse(xml_filepath)
 
-        xsl_filename = 'transform_boletim.xsl'
         xsl_filepath = XmlService.STATIC_PATH % xsl_filename
         with open(xsl_filepath):
             xslt = etree.parse(xsl_filepath)
