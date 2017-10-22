@@ -42,7 +42,7 @@ class Student:
         try:
             transform = etree.XSLT(xslt)
             newdom = transform(dom)
-            result_xml = etree.tostring(newdom, pretty_print=True)
+            valid_xml = etree.tostring(newdom, pretty_print=True)
         except:
             print "deu ruim"
         return valid_xml
@@ -61,6 +61,7 @@ class Student:
 
         if self.__checkXmlStatus(xml, 'boletim.xsd'):
             xml = self._convertInvalidXml('boletim.xml')
+
         submit_message =  self.__prepareMessage('submeter', xml)
         self.s.send(submit_message)
         xml = self.s.recv(4096)
