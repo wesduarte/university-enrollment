@@ -23,7 +23,7 @@ class Student:
         message = '<?xml version="1.0" encoding="utf-8" ?>\n \
             <request xmlns="https://www.w3schools.com">\n \
                 <nome_metodo>%s</nome_metodo>\n \
-                <parametro><![CDATA[ %s ]></parametro>\n \
+                <parametro><![CDATA[%s]]></parametro>\n \
                 <tipo_retorno> int </tipo_retorno>\n \
             </request>\n' % (method_name, parameter_name)
 
