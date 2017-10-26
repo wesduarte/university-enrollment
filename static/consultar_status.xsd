@@ -1,9 +1,13 @@
-<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" targetNamespace="https://www.w3schools.com" xmlns="https://www.w3schools.com" elementFormDefault="qualified">
-    <xs:element name="cpf">
-        <xs:simpleType>
-            <xs:restriction base="xs:string">
-                <xs:length value="11"/>
-            </xs:restriction>
-        </xs:simpleType>
-    </xs:element>
+<?xml version="1.0"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema"
+targetNamespace="https://www.w3schools.com"
+xmlns="https://www.w3schools.com"
+elementFormDefault="qualified">
+  <xs:element name="response_consulta_status">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element name="status_consulta_status" type="xs:integer"/>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
 </xs:schema>
